@@ -7,7 +7,7 @@ import sys
 
 
 def getLine(arquivo):
-    fp = open(arquivo, "r") #abre em modo de leitura o arquivo com a definicao da maquina de turing
+    fp = open(arquivo, "r") #abre em modo de leitura o arquivo com e retorna tambem o alfabeto da maquina de turing
     lines_cmd = fp.readlines()
     lines = []
     for line in lines_cmd:
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     lines,input_alphabet = getLine(sys.argv[1]) #Abre arquivo txt
     alphabetLower = []
 
-    for ia in input_alphabet:
+    for ia in input_alphabet: #recebe como alfabetode entrada letras minusculas
         if(ia.islower() and ia != '#'):
             alphabetLower.append(ia)
             
@@ -65,20 +65,32 @@ if __name__ == "__main__":
     saidas = []
     num = 0
     tam = len(alphabetLower)
-    for a in range(tam):
-        for b in range(tam):
-            for c in range(tam):
-                for d in range(tam):
-                    for e in range(tam):
-                        for f in range(tam):
-                            for g in range(tam):
-                                for h in range(tam):
-                                    for i in range(tam):
-                                        for x in range(1,tam):
+
+    aux = [0,0,0,0,0,0,0,0,0,0]
+    for a in range(aux[9],tam):
+        for b in range(aux[8],tam):
+            for c in range(aux[7],tam):
+                for d in range(aux[6],tam):
+                    for e in range(aux[5],tam):
+                        for f in range(aux[4],tam):
+                            for g in range(aux[3],tam):
+                                for h in range(aux[2],tam):
+                                    for i in range(aux[1],tam):
+                                        for x in range(aux[0],tam):
                                             word=[''.join(alphabetLower[a] + alphabetLower[b] + alphabetLower[c] + alphabetLower[d] + alphabetLower[e] +  alphabetLower[f] +  alphabetLower[g] +  alphabetLower[h] +  alphabetLower[i] +  alphabetLower[x]).replace(' ','')]
                                             if(work(lines,word) and not word in saidas):
                                                 saidas.append(word)
                                                 num += 1 
+        
                                                 print(num,'->',word[0])
-                                                  
+                                            aux[0] = 1
+                                        aux[1] = 1
+                                    aux[2] = 1
+                                aux[3] = 1
+                            aux[4] = 1
+                        aux[5] = 1
+                    aux[6] = 1
+                aux[7] = 1
+            aux[8] = 1
+        aux[9] = 1                                                  
 
