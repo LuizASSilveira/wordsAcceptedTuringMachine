@@ -51,11 +51,9 @@ def work(lines,fitas) :
         # print("Rejeitou")
     # print(result[1])
 
-if __name__ == "__main__":
-    
+def versaoAula():
     lines,input_alphabet = getLine(sys.argv[1]) #Abre arquivo txt
     alphabetLower = []
-
     for ia in input_alphabet: #recebe como alfabetode entrada letras minusculas
         if(ia.islower() and ia != '#'):
             alphabetLower.append(ia)
@@ -81,7 +79,6 @@ if __name__ == "__main__":
                                             if(work(lines,word) and not word in saidas):
                                                 saidas.append(word)
                                                 num += 1 
-        
                                                 print(num,'->',word[0])
                                             aux[0] = 1
                                         aux[1] = 1
@@ -92,5 +89,49 @@ if __name__ == "__main__":
                     aux[6] = 1
                 aux[7] = 1
             aux[8] = 1
-        aux[9] = 1                                                  
+        aux[9] = 1      
 
+
+import itertools
+import functools 
+import operator  
+  
+def convertTuple(tup): 
+    str = functools.reduce(operator.add, (tup)) 
+    return str
+
+def generateWord(alfabeto,n):
+    geneWord = []     
+    rep = 1
+    
+    while(rep <= n):
+        for tuples in list(itertools.product(alfabeto, repeat=rep)):
+            geneWord.append(convertTuple(tuples))
+        rep += 1    
+
+    return geneWord
+
+def versaoCorrigida(n):
+
+    lines,input_alphabet = getLine(sys.argv[1]) #Abre arquivo txt
+    alphabetLower = []
+    for ia in input_alphabet: #recebe como alfabetode entrada letras minusculas
+        if(ia.islower() and ia != '#'):
+            alphabetLower.append(ia)
+    word = generateWord(alphabetLower,n)
+    cont = 0
+
+    for i in range(len(word)):
+        w = [str(word[i])]
+        resp = work(lines, w)
+        
+        if(resp):
+            print([str(word[i])],'-->','Aceito')
+            cont += 1
+        
+    print('Numero de palavras Aceitas: ',cont)
+
+# print(generateWord(['a','b','c'],2))
+if __name__ == "__main__":
+    # versaoAula()
+    versaoCorrigida(12)
